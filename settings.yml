@@ -2,80 +2,135 @@ use_default_settings: true
 
 general:
   instance_name: "SearXNG Web"
+  debug: false
+  donation_url: false
+  contact_url: false
+  enable_metrics: false
 
 server:
   secret_key: "5xK3pL2vQ7tA4sM8ZcR1YwF6HnU5bE0D"
   limiter: false
   image_proxy: false
   method: "GET"
+  default_http_headers:
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    X-Robots-Tag: noindex, nofollow
+    Referrer-Policy: no-referrer
 
 search:
   safe_search: 0
   default_lang: "en"
+  ban_time_on_fail: 5
+  max_ban_time_on_fail: 120
+  suspended_times:
+    SearxEngineAccessDenied: 86400
+    SearxEngineCaptcha: 86400
+    SearxEngineTooManyRequests: 3600
   formats:
     - json
     - html
 
 ui:
   default_theme: simple
+  infinite_scroll: false
+  center_alignment: false
+  results_on_new_tab: false
+  search_on_category_select: false
 
 outgoing:
-  request_timeout: 6
-  max_request_timeout: 12
+  request_timeout: 8
+  max_request_timeout: 15
+  pool_connections: 20
+  pool_maxsize: 20
+  enable_http2: true
+  retries: 2
+  retry_on_http_error: true
 
 engines:
+  # ── PRIMARY — low CAPTCHA risk, good general coverage ────
+  - name: brave
+    engine: brave
+    shortcut: br
+    categories: general
+    timeout: 8
+    disabled: false
 
-  # ── ACTIVE ──────────────────────────────────────────────
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: ddg
+    categories: general
+    timeout: 8
+    disabled: false
+
+  - name: mojeek
+    engine: mojeek
+    shortcut: mj
+    categories: general
+    timeout: 8
+    disabled: false
+
+  - name: qwant
+    engine: qwant
+    shortcut: qw
+    categories: general
+    timeout: 8
+    disabled: false
+
+  # ── NEWS — market/industry content ───────────────────────
+  - name: google news
+    engine: google_news
+    shortcut: gn
+    categories: news
+    timeout: 8
+    disabled: false
+
+  - name: bing news
+    engine: bing_news
+    shortcut: bng
+    categories: news
+    timeout: 8
+    disabled: false
+
+  - name: brave news
+    engine: brave_news
+    shortcut: brn
+    categories: news
+    timeout: 8
+    disabled: false
+
+  # ── SECONDARY — use sparingly, higher CAPTCHA risk ───────
+  - name: bing
+    engine: bing
+    shortcut: bi
+    categories: general
+    timeout: 8
+    disabled: false
+
   - name: startpage
     engine: startpage
     shortcut: sp
     categories: general
-    timeout: 6
+    timeout: 8
+    disabled: false
 
-  - name: wikipedia
-    engine: wikipedia
-    shortcut: wp
-    categories: general
-    timeout: 6
-
-  - name: wikidata
-    engine: wikidata
-    shortcut: wd
-    categories: general
-    timeout: 6
-
-  # ── DISABLED ─────────────────────────────────────────────
+  # ── DISABLED — too aggressive / not useful for pipeline ──
   - name: google
     engine: google
     shortcut: go
     disabled: true
 
-  - name: duckduckgo
-    engine: duckduckgo
-    shortcut: ddg
-    disabled: true
-
-  - name: bing
-    engine: bing
-    shortcut: bi
-    disabled: true
-
-  - name: brave
-    engine: brave
-    shortcut: br
-    disabled: true
-
-  - name: mojeek
-    engine: mojeek
-    shortcut: mj
-    disabled: true
-
-  - name: qwant
-    engine: qwant
-    shortcut: qw
-    disabled: true
-
   - name: yahoo
     engine: yahoo
     shortcut: yh
+    disabled: true
+
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wp
+    disabled: true
+
+  - name: wikidata
+    engine: wikidata
+    shortcut: wd
     disabled: true
