@@ -1,76 +1,153 @@
 use_default_settings: true
+
 general:
   instance_name: "SearXNG Academic"
+  debug: false
+  donation_url: false
+  contact_url: false
+  enable_metrics: false
+
 server:
   secret_key: "5xK3pL2vQ7tA4sM8ZcR1YwF6HnU5bE0D"
   limiter: false
   image_proxy: false
   method: "GET"
+  default_http_headers:
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 1; mode=block
+    X-Robots-Tag: noindex, nofollow
+    Referrer-Policy: no-referrer
+
 search:
   safe_search: 0
   default_lang: "en"
+  ban_time_on_fail: 5
+  max_ban_time_on_fail: 120
+  suspended_times:
+    SearxEngineAccessDenied: 86400
+    SearxEngineCaptcha: 86400
+    SearxEngineTooManyRequests: 3600
   formats:
     - json
     - html
+
 ui:
   default_theme: simple
+  infinite_scroll: false
+  center_alignment: false
+  results_on_new_tab: false
+  search_on_category_select: false
+
 outgoing:
-  request_timeout: 3
-  max_request_timeout: 6
+  request_timeout: 8
+  max_request_timeout: 15
+  pool_connections: 20
+  pool_maxsize: 20
+  enable_http2: true
+  retries: 2
+  retry_on_http_error: true
+
 engines:
-  # ── ACTIVE ──────────────────────────────────────────────
+  # ── PRIMARY — academic sources, no CAPTCHA risk ──────────
   - name: arxiv
     engine: arxiv
     shortcut: ax
     categories: [science, general]
-    timeout: 3
+    timeout: 8
+    disabled: false
+
   - name: semantic scholar
     engine: semantic_scholar
     shortcut: ss
     categories: [science, general]
-    timeout: 3
+    timeout: 8
+    disabled: false
+
   - name: pubmed
     engine: pubmed
     shortcut: pm
     categories: [science, general]
-    timeout: 3
-  # ── DISABLED ─────────────────────────────────────────────
+    timeout: 8
+    disabled: false
+
+  # ── SECONDARY — open academic indexes ────────────────────
+  - name: openalex
+    engine: openalex
+    shortcut: oa
+    categories: [science, general]
+    timeout: 8
+    disabled: false
+
+  - name: crossref
+    engine: crossref
+    shortcut: cr
+    categories: [science, general]
+    timeout: 8
+    disabled: false
+
+  - name: base
+    engine: base
+    shortcut: bs
+    categories: [science, general]
+    timeout: 8
+    disabled: false
+
+  - name: core
+    engine: core
+    shortcut: co
+    categories: [science, general]
+    timeout: 8
+    disabled: false
+
+  # ── REFERENCE — encyclopedic context only ────────────────
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wp
+    categories: general
+    timeout: 8
+    disabled: false
+
+  # ── DISABLED — web engines not appropriate for academic ──
   - name: google
     engine: google
     shortcut: go
     disabled: true
+
   - name: startpage
     engine: startpage
     shortcut: sp
     disabled: true
-  - name: wikipedia
-    engine: wikipedia
-    shortcut: wp
-    disabled: true
+
   - name: wikidata
     engine: wikidata
     shortcut: wd
     disabled: true
+
   - name: duckduckgo
     engine: duckduckgo
     shortcut: ddg
     disabled: true
+
   - name: bing
     engine: bing
     shortcut: bi
     disabled: true
+
   - name: brave
     engine: brave
     shortcut: br
     disabled: true
+
   - name: mojeek
     engine: mojeek
     shortcut: mj
     disabled: true
+
   - name: qwant
     engine: qwant
     shortcut: qw
     disabled: true
+
   - name: yahoo
     engine: yahoo
     shortcut: yh
