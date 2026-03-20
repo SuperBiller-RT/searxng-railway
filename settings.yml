@@ -39,35 +39,35 @@ ui:
   search_on_category_select: false
 
 outgoing:
-  request_timeout: 8
-  max_request_timeout: 15
+  request_timeout: 2
+  max_request_timeout: 4
   pool_connections: 20
   pool_maxsize: 20
   enable_http2: true
-  retries: 2
-  retry_on_http_error: true
+  retries: 1
+  retry_on_http_error: false
 
 engines:
-  # ── PRIMARY — academic sources, no CAPTCHA risk ──────────
+  # ── PRIMARY — fast academic, no CAPTCHA risk ─────────────
   - name: arxiv
     engine: arxiv
     shortcut: ax
     categories: [science, general]
-    timeout: 8
+    timeout: 2
     disabled: false
 
   - name: semantic scholar
     engine: semantic_scholar
     shortcut: ss
     categories: [science, general]
-    timeout: 8
+    timeout: 2
     disabled: false
 
   - name: pubmed
     engine: pubmed
     shortcut: pm
     categories: [science, general]
-    timeout: 8
+    timeout: 2
     disabled: false
 
   # ── SECONDARY — open academic indexes ────────────────────
@@ -75,28 +75,28 @@ engines:
     engine: openalex
     shortcut: oa
     categories: [science, general]
-    timeout: 8
+    timeout: 2
     disabled: false
 
   - name: crossref
     engine: crossref
     shortcut: cr
     categories: [science, general]
-    timeout: 8
+    timeout: 2
     disabled: false
 
   - name: base
     engine: base
     shortcut: bs
     categories: [science, general]
-    timeout: 8
+    timeout: 2
     disabled: false
 
   - name: core
     engine: core
     shortcut: co
     categories: [science, general]
-    timeout: 8
+    timeout: 2
     disabled: false
 
   # ── REFERENCE — encyclopedic context only ────────────────
@@ -104,10 +104,10 @@ engines:
     engine: wikipedia
     shortcut: wp
     categories: general
-    timeout: 8
+    timeout: 2
     disabled: false
 
-  # ── DISABLED — web engines not appropriate for academic ──
+  # ── DISABLED ──────────────────────────────────────────────
   - name: google
     engine: google
     shortcut: go
