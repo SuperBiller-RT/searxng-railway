@@ -39,42 +39,43 @@ ui:
   search_on_category_select: false
 
 outgoing:
-  request_timeout: 8
-  max_request_timeout: 15
+  request_timeout: 3
+  max_request_timeout: 5
   pool_connections: 20
   pool_maxsize: 20
   enable_http2: true
-  retries: 2
-  retry_on_http_error: true
+  retries: 1
+  retry_on_http_error: false
 
 engines:
-  # ── PRIMARY — low CAPTCHA risk, good general coverage ────
+  # ── PRIMARY — fast, low CAPTCHA risk ─────────────────────
   - name: brave
     engine: brave
     shortcut: br
     categories: general
-    timeout: 8
+    timeout: 3
     disabled: false
 
   - name: duckduckgo
     engine: duckduckgo
     shortcut: ddg
     categories: general
-    timeout: 8
+    timeout: 3
     disabled: false
 
+  # ── SECONDARY — enable if primary returns thin results ───
   - name: mojeek
     engine: mojeek
     shortcut: mj
     categories: general
-    timeout: 8
+    timeout: 3
     disabled: false
 
   - name: qwant
     engine: qwant
     shortcut: qw
     categories: general
-    timeout: 8
+    timeout: 3
     disabled: false
 
   # ── NEWS — market/industry content ───────────────────────
@@ -82,39 +83,32 @@ engines:
     engine: google_news
     shortcut: gn
     categories: news
-    timeout: 8
-    disabled: false
-
-  - name: bing news
-    engine: bing_news
-    shortcut: bng
-    categories: news
-    timeout: 8
+    timeout: 3
     disabled: false
 
   - name: brave news
     engine: brave_news
     shortcut: brn
     categories: news
-    timeout: 8
+    timeout: 3
     disabled: false
 
-  # ── SECONDARY — use sparingly, higher CAPTCHA risk ───────
+  # ── DISABLED — too slow or high CAPTCHA risk ─────────────
+  - name: bing news
+    engine: bing_news
+    shortcut: bng
+    disabled: true
+
   - name: bing
     engine: bing
     shortcut: bi
-    categories: general
-    timeout: 8
-    disabled: false
+    disabled: true
 
   - name: startpage
     engine: startpage
     shortcut: sp
-    categories: general
-    timeout: 8
-    disabled: false
+    disabled: true
 
-  # ── DISABLED — too aggressive / not useful for pipeline ──
   - name: google
     engine: google
     shortcut: go
