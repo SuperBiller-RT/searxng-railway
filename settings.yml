@@ -44,66 +44,57 @@ engines:
     categories: general
     timeout: 6
     disabled: false
-
   - name: brave
     engine: brave
     shortcut: br
     categories: general
     timeout: 5
     disabled: false
-
   - name: duckduckgo
     engine: duckduckgo
     shortcut: ddg
     categories: general
     timeout: 5
     disabled: false
-
-  - name: mojeek
-    engine: mojeek
-    shortcut: mj
-    categories: general
-    timeout: 5
-    disabled: false
-
-  - name: qwant
-    engine: qwant
-    shortcut: qw
-    categories: general
-    timeout: 5
-    disabled: false
-
-  - name: wikipedia
-    engine: wikipedia
-    shortcut: wp
-    categories: general
-    timeout: 5
-    disabled: false
-
-  - name: bing
-    engine: bing
-    shortcut: bi
-    categories: general
-    timeout: 6
-    disabled: false
-
-  - name: google news
-    engine: google_news
-    shortcut: gn
-    categories: news
-    timeout: 5
-    disabled: false
-
-  - name: brave news
-    engine: brave_news
-    shortcut: brn
-    categories: news
-    timeout: 5
-    disabled: false
-
   - name: startpage
     engine: startpage
     shortcut: sp
     categories: general
     timeout: 6
     disabled: false
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wp
+    categories: general
+    timeout: 5
+    disabled: false
+  - name: google news
+    engine: google_news
+    shortcut: gn
+    categories: news
+    timeout: 5
+    disabled: false
+  - name: brave news
+    engine: brave_news
+    shortcut: brn
+    categories: news
+    timeout: 5
+    disabled: false
+  - name: bing
+    engine: bing
+    shortcut: bi
+    categories: general
+    timeout: 6
+    disabled: true
+  - name: mojeek
+    engine: mojeek
+    shortcut: mj
+    categories: general
+    timeout: 5
+    disabled: true
+  - name: qwant
+    engine: qwant
+    shortcut: qw
+    categories: general
+    timeout: 5
+    disabled: true
